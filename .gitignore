@@ -1,0 +1,19 @@
+# Symfony
+/var/*
+/public/bundles/*
+/public/uploads/*
+/var/cache/*
+/var/log/*
+/vendor/*
+/.env.local
+/.env.local.php
+/.phpunit.result.cache
+/php-cs-fixer.php
+/phpstan.neon
+/symfony.lock
+
+# Composer
+/composer.phar
+/vendor/
+
+node_modules/
