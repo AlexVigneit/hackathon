@@ -8,11 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ReportHistoryController extends AbstractController
 {
-    #[Route('/report/history', name: 'app_report_history')]
+    #[Route('/reports', name: 'app_reports')]
     public function index(): Response
     {
-        return $this->render('report_history/index.html.twig', [
-            'controller_name' => 'ReportHistoryController',
-        ]);
+        if ($security->getUser()) {
+            return $this->render('reports/index.html.twig', [
+                'controller_name' => 'ReportHistoryController',
+            ]);
+        } else {            
+            return $this->redirectToRoute('app_login');
+        }
     }
 }

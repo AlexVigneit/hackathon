@@ -13,11 +13,8 @@ class RegisterController extends AbstractController
     public function index(Security $security): Response
     {
         if ($security->getUser()) {
-            // Redirige l'utilisateur vers la page d'accueil si connecté
             return $this->redirectToRoute('app_home');
-        } else {
-            // Redirige l'utilisateur vers la page de connexion si non connecté
-            
+        } else {            
             return $this->render('register/index.html.twig', [
                 'controller_name' => 'RegisterController',
             ]);
