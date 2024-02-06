@@ -12,12 +12,42 @@ class ReportHistoryController extends AbstractController
     #[Route('/reports', name: 'app_reports')]
     public function index(Security $security): Response
     {
-        if ($security->getUser()) {
+        $user = $security->getUser();
+        if ($user) {
+            $rapports = $user->getReports();
+
+            $rapportsArray = [];
+            foreach ($rapports as $rapport) {
+                $rapportsArray[] = [
+                    'github_repository_url' => $rapport->getGithubRepositoryUrl(),
+                    'created_at' => $rapport->getCreatedAt()->format('Y-m-d'),
+                    'analyse_report' => $rapport->getAnalyseReport(),
+                ];
+            }
+
             return $this->render('reports/index.html.twig', [
                 'controller_name' => 'ReportHistoryController',
+                'rapports' => $rapportsArray
             ]);
         } else {            
             return $this->redirectToRoute('app_login');
         }
+    }
+
+    #[Route('/api/reports', name: 'api_reports')]
+    public function Reports(Security $security): Response
+    {
+        $user = $security->getUser();
+        $rapports = $user->getReports(); // Assurez-vous que votre entité User a une méthode getReports()
+
+        $rapportsArray = [];
+        foreach ($rapports as $rapport) {
+            $rapportsArray[] = [
+                'github_repository_url' => $rapport->getGithubRepositoryUrl(),
+                'created_at' => $rapport->getCreatedAt()->format('Y-m-d H:i:s'),
+                'analyse_report' => $rapport->getAnalyseReport(),
+            ];
+        }
+        return $this->json($rapportsArray);
     }
 }

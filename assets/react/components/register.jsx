@@ -80,6 +80,6 @@ const Register = () => {
     );
 };
 
-const formHtml = document.getElementById('register');
-const form = createRoot(formHtml);
-form.render(<Register />);
+const registerHtml = document.getElementById('register');
+const register = createRoot(registerHtml);
+register.render(<Register />);

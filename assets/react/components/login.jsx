@@ -69,6 +69,6 @@ const Login = () => {
     );
 };
 
-const formHtml = document.getElementById('login');
-const form = createRoot(formHtml);
-form.render(<Login />);
+const loginHtml = document.getElementById('login');
+const login = createRoot(loginHtml);
+login.render(<Login />);

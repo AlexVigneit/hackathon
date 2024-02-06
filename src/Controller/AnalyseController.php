@@ -9,12 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Report;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\GitHubAnalysisService;
+use Symfony\Bundle\SecurityBundle\Security;
 
 class AnalyseController extends AbstractController
 {
     #[Route('/analyse', name: 'analyse_url', methods: ['POST'])]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
         $data = json_decode($request->getContent(), true);
         $url = $data['url'] ?? null;
         $analysisRequest = new Report();
@@ -23,8 +25,14 @@ class AnalyseController extends AbstractController
         $analysisRequest->setGithubRepositoryUrl($url);
         $analysisRequest->setCreatedAt(new \DateTimeImmutable());
         $analysisRequest->setAnalyseReport($report);
+        $analysisRequest->setUser($user);
+        
 
         $entityManager->persist($analysisRequest);
+        $entityManager->flush();
+
+        $user->addReport($analysisRequest);
+        $entityManager->persist($user);
         $entityManager->flush();
 
         return $this->json($analysisRequest);

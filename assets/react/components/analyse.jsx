@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Form as BootstrapForm, Button } from 'react-bootstrap';
 
-const Form = () => {
+const Analyse = () => {
     const [url, setUrl] = useState('');
 
     const handleSubmit = async (event) => {
@@ -50,6 +50,6 @@ const Form = () => {
     );
 };
 
-const formHtml = document.getElementById('form');
-const form = createRoot(formHtml);
-form.render(<Form />);
+const analyseHtml = document.getElementById('analyse');
+const analyse = createRoot(analyseHtml);
+analyse.render(<Analyse />);

@@ -23,6 +23,10 @@ class Report
     #[ORM\Column(type: Types::TEXT)]
     private ?string $analyse_report = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +64,18 @@ class Report
     public function setAnalyseReport(string $analyse_report): static
     {
         $this->analyse_report = $analyse_report;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

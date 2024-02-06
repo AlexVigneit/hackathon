@@ -1,11 +1,11 @@
 {
   "entrypoints": {
-    "form": {
+    "analyse": {
       "js": [
         "/build/runtime.568f3bb4.js",
         "/build/523.49cc4a58.js",
         "/build/733.3d6e3094.js",
-        "/build/form.13281621.js"
+        "/build/analyse.7ceebc10.js"
       ]
     },
     "login": {
@@ -28,8 +28,8 @@
       "js": [
         "/build/runtime.568f3bb4.js",
         "/build/523.49cc4a58.js",
-        "/build/284.6a2b0213.js",
-        "/build/reportHistory.06246e60.js"
+        "/build/658.425ec6c2.js",
+        "/build/reportHistory.6e8674a3.js"
       ]
     },
     "app": {
