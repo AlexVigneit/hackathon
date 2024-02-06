@@ -28,6 +28,15 @@ const ReportHistory = () => {
     }));
   };
 
+  const formatReport = (report) => {
+    return report.split('\n').map((line, index) => (
+      <React.Fragment key={index}>
+        {line}
+        <br />
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -59,7 +68,9 @@ const ReportHistory = () => {
                   <td colSpan="3">
                     <Collapse isOpen={isOpen[index]}>
                       <div className="report-content">
-                        {report.analyse_report}
+                        <h3>{report.analyse_report_title}</h3>
+                        <p>{formatReport(report.analyse_report)}</p>
+                        
                       </div>
                     </Collapse>
                   </td>

@@ -32,12 +32,10 @@ class MailPageController extends AbstractController
             ->from('ifullteam@gmail.com')
             ->to($security->getUser()->getUserIdentifier())
             ->subject('Rapport d\'analyse github')
-            ->text('The text')
-            ->html('<h1>TESTINGZZ</h1>');
-
+            ->text('The text');
         try {
             $mailer->send($email);
-            return new Response('Email envoyé avec succès!');
+            return new Response('Email envoyé avec succès au ' . $security->getUser()->getUserIdentifier() . '!');
         } catch (TransportExceptionInterface $e) {
             return new Response('Erreur lors de l\'envoi de l\'email: '.$e->getMessage());
         }

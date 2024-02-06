@@ -38,14 +38,15 @@ class ReportHistoryController extends AbstractController
     public function Reports(Security $security): Response
     {
         $user = $security->getUser();
-        $rapports = $user->getReports(); // Assurez-vous que votre entité User a une méthode getReports()
+        $rapports = $user->getReports();
 
         $rapportsArray = [];
         foreach ($rapports as $rapport) {
+            $analyse_report = $rapport->getAnalyseReport();
             $rapportsArray[] = [
                 'github_repository_url' => $rapport->getGithubRepositoryUrl(),
                 'created_at' => $rapport->getCreatedAt()->format('Y-m-d H:i:s'),
-                'analyse_report' => $rapport->getAnalyseReport(),
+                'analyse_report' => $analyse_report,
             ];
         }
         return $this->json($rapportsArray);
