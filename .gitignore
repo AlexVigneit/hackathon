@@ -1,0 +1,61 @@
+### Symfony ###
+# Cache et logs (Symfony3+)
+/var/*
+!/var/cache
+/var/cache/*
+!/var/cache/.gitkeep
+!/var/sessions
+/var/sessions/*
+!/var/sessions/.gitkeep
+/var/logs/*
+!/var/log/.gitkeep
+# Emails de développement
+/var/spool/*
+# Fichiers de paramètres de sécurité
+/var/data/*
+!/var/data/.gitkeep
+
+# Fichiers de paramètres
+/app/config/parameters.yml
+/app/config/parameters.ini
+
+# Fichiers et dossiers de build
+/bin/
+/vendor/
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Assets et fichiers compilés
+/public/bundles/
+/public/build/
+/public/css/
+/public/js/
+
+# Dumps de base de données
+*.sql
+*.sqlite
+
+# Fichiers d'environnement
+.env.local
+.env.*.local
+.phpunit.result.cache
+
+# Fichiers de configuration IDE et éditeurs de texte
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.DS_Store
+
+# Autres fichiers et dossiers ignorés
+/.htaccess
+/.php_cs.cache
+/.php_cs.dist
+/.vagrant
+/Dockerfile
+/docker-compose.yml
+/_ide_helper.php
+/_ide_helper_models.php
+/phpstan.neon.dist
