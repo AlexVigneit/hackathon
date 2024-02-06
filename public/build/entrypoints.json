@@ -11,14 +11,14 @@
       "js": [
         "/build/runtime.568f3bb4.js",
         "/build/270.58ee2225.js",
-        "/build/login.33e92779.js"
+        "/build/login.92ad9164.js"
       ]
     },
     "register": {
       "js": [
         "/build/runtime.568f3bb4.js",
         "/build/270.58ee2225.js",
-        "/build/register.83540925.js"
+        "/build/register.86d5bca1.js"
       ]
     },
     "app": {

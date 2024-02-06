@@ -19,8 +19,7 @@ const Login = () => {
             const response = await fetch('http://127.0.0.1:8000/login',
                 requestOptions
             );
-            const data = await response.json();
-            console.log('Analyse effectué avec succès:', data);
+            window.location.reload();
         } catch (error) {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
         }

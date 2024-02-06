@@ -22,15 +22,7 @@ const Register = () => {
                 requestOptions
             );
             const data = await response.json();
-
-            if (data) {
-                localStorage.setItem('token', data.token);
-                console.log('Inscription réussie et token stocké:', data.token);
-            } else {
-                console.log('Inscription réussie mais aucun token retourné:', data);
-            }
-
-            console.log('Analyse effectué avec succès:', data);
+            window.location.reload();
         } catch (error) {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
         }

@@ -17,11 +17,17 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
 
 class AuthController extends AbstractController
 {
     #[Route('/register', name: 'app_auth', methods: ['POST'])]
-    public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, ValidatorInterface $validator): Response
+    public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher, TokenStorageInterface $tokenStorage): Response
     {
         $data = json_decode($request->getContent(), true);
 
@@ -30,6 +36,7 @@ class AuthController extends AbstractController
         $user->setLastName($data['lastName']);
         $user->setEmail($data['email']);
         $user->setPassword($data['password']);
+        $user->setRoles(['ROLE_USER']);
 
         $errors = $validator->validate($user);
 
@@ -43,9 +50,15 @@ class AuthController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
+
+        $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+        $tokenStorage->setToken($token);
+
+        $event = new InteractiveLoginEvent($request, $token);
+        $eventDispatcher->dispatch($event, SecurityEvents::INTERACTIVE_LOGIN);
+
         return $this->json([
             'message' => 'User registered successfully',
-            'token' => $token,
         ]);
     }   
 
