@@ -3,22 +3,33 @@
     "form": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/270.58ee2225.js",
-        "/build/form.82839ce6.js"
+        "/build/523.49cc4a58.js",
+        "/build/733.3d6e3094.js",
+        "/build/form.13281621.js"
       ]
     },
     "login": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/270.58ee2225.js",
-        "/build/login.92ad9164.js"
+        "/build/523.49cc4a58.js",
+        "/build/733.3d6e3094.js",
+        "/build/login.ed4ecbc8.js"
       ]
     },
     "register": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/270.58ee2225.js",
-        "/build/register.86d5bca1.js"
+        "/build/523.49cc4a58.js",
+        "/build/733.3d6e3094.js",
+        "/build/register.c699c0db.js"
+      ]
+    },
+    "reportHistory": {
+      "js": [
+        "/build/runtime.568f3bb4.js",
+        "/build/523.49cc4a58.js",
+        "/build/284.6a2b0213.js",
+        "/build/reportHistory.06246e60.js"
       ]
     },
     "app": {
