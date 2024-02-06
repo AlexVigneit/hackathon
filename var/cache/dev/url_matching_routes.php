@@ -9,7 +9,12 @@ return [
     false, // $matchHost
     [ // $staticRoutes
         '/analyse' => [[['_route' => 'analyse_url', '_controller' => 'App\\Controller\\AnalyseController::index'], null, ['POST' => 0], null, false, false, null]],
+        '/register' => [
+            [['_route' => 'app_auth', '_controller' => 'App\\Controller\\AuthController::register'], null, ['POST' => 0], null, false, false, null],
+            [['_route' => 'app_register', '_controller' => 'App\\Controller\\RegisterController::index'], null, null, null, false, false, null],
+        ],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
+        '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\LoginController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

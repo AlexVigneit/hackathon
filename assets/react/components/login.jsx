@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
+import { Form as BootstrapForm, Button } from 'react-bootstrap';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const Login = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: email, password: password})
+            body: JSON.stringify({ username: email, password: password })
         };
 
         try {
@@ -26,29 +27,45 @@ const Login = () => {
     };
 
     return (
-        <div className="form-container">
-            <h2>Registration</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Email :
-                    <input
+        <div className="form-container centered-form">
+            <h2>Login</h2>
+            <BootstrapForm onSubmit={handleSubmit} className="custom-form">
+                <BootstrapForm.Group controlId="formEmail">
+                    <BootstrapForm.Label>Email :</BootstrapForm.Label>
+                    <BootstrapForm.Control
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                </label>
-                <label>
-                    Password :
-                    <input
+                </BootstrapForm.Group>
+                <BootstrapForm.Group controlId="formPassword">
+                    <BootstrapForm.Label>Password :</BootstrapForm.Label>
+                    <BootstrapForm.Control
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                </label>
-                <button type="submit">Register</button>
-            </form>
+                </BootstrapForm.Group>
+                <div className="wrapper-btn">
+                    <Button
+                        type="submit"
+                        className="mt-3"
+                        style={{ backgroundColor: 'purple', color: 'white' }}
+                    >
+                        Login
+                    </Button>
+    
+                    <Button
+                        href="/register"
+                        className="mt-3"
+                        style={{ backgroundColor: 'purple', color: 'white' }}
+                    >
+                        Register
+                    </Button>
+                </div>
+            </BootstrapForm>
         </div>
     );
 };

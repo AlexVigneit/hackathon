@@ -12,18 +12,33 @@ return [[
     'entrypoints' => [
         'form' => [
             'js' => [
-                '/build/runtime.ec2b70cf.js',
-                '/build/213.517761e3.js',
-                '/build/form.aabcd01a.js',
+                '/build/runtime.568f3bb4.js',
+                '/build/270.58ee2225.js',
+                '/build/form.82839ce6.js',
+            ],
+        ],
+        'login' => [
+            'js' => [
+                '/build/runtime.568f3bb4.js',
+                '/build/270.58ee2225.js',
+                '/build/login.1d7dd419.js',
+            ],
+        ],
+        'register' => [
+            'js' => [
+                '/build/runtime.568f3bb4.js',
+                '/build/270.58ee2225.js',
+                '/build/register.83540925.js',
             ],
         ],
         'app' => [
             'js' => [
-                '/build/runtime.ec2b70cf.js',
-                '/build/app.aa1bf742.js',
+                '/build/runtime.568f3bb4.js',
+                '/build/app.f1537bb5.js',
             ],
             'css' => [
-                '/build/app.b75294ae.css',
+                '/build/462.a0c661c0.css',
+                '/build/app.d5522d4b.css',
             ],
         ],
     ],

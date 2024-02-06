@@ -157,7 +157,7 @@ class JsonLoginLdapConfig
     }
 
     /**
-     * @default '{username}'
+     * @default '{user_identifier}'
      * @param ParamConfigurator|mixed $value
      * @return $this
      */

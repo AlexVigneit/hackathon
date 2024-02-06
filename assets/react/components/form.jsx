@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
+import { Form as BootstrapForm, Button } from 'react-bootstrap';
 
 const Form = () => {
     const [url, setUrl] = useState('');
@@ -25,20 +26,26 @@ const Form = () => {
     };
 
     return (
-        <div className="form-container">
+        <div className="form-container centered-form">
             <h2>Formulaire de demande d'analyse</h2>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    URL GitHub à analyser :
-                    <input
+            <BootstrapForm onSubmit={handleSubmit} className="custom-form">
+                <BootstrapForm.Group controlId="formUrl">
+                    <BootstrapForm.Label>URL GitHub à analyser :</BootstrapForm.Label>
+                    <BootstrapForm.Control
                         type="text"
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}
                         required
                     />
-                </label>
-                <button type="submit">Analyser le code PHP</button>
-            </form>
+                </BootstrapForm.Group>
+                <Button
+                    type="submit"
+                    className="mt-3"
+                    style={{ backgroundColor: 'purple', color: 'white' }}
+                >
+                    Analyser le code PHP
+                </Button>
+            </BootstrapForm>
         </div>
     );
 };
