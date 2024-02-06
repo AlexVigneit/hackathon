@@ -15,7 +15,7 @@ class GitHubAnalysisService
     public function __construct()
     {
         $this->client = new Client();
-        $this->phpFilesDirectory = 'Applications/MAMP/htdocs/hackathon-security/backend/src/phpFiles';
+        $this->phpFilesDirectory = $_SERVER['DOCUMENT_ROOT'] . '/phpFiles';
         if (!file_exists($this->phpFilesDirectory)) {
             mkdir($this->phpFilesDirectory, 0777, true);
         }
@@ -24,6 +24,7 @@ class GitHubAnalysisService
     public function processAnalysisRequest($url) : string
     {
         [$owner, $repo] = $this->parseRepositoryUrl($url);
+
 
         try {
             $files = $this->getPhpFiles($owner, $repo);
@@ -88,10 +89,9 @@ class GitHubAnalysisService
 
     private function formatReport(array $reportData): string
     {
-        $basePathToRemove = "/Applications/MAMP/htdocs/hackathon-security/backend/public/Applications/MAMP/htdocs/hackathon-security/backend/src/phpFiles/";
         $reportString = "Rapport d'analyse :\n";
         foreach ($reportData['files'] as $file => $errors) {
-            $file = str_replace($basePathToRemove, '', $file);
+            $file = str_replace($this->phpFilesDirectory, '', $file);
             $reportString .= "\nFichier : $file\n";
             foreach ($errors['messages'] as $error) {
                 $reportString .= "Ligne {$error['line']} : {$error['message']}\n";

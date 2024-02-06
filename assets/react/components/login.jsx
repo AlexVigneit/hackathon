@@ -55,14 +55,6 @@ const Login = () => {
                     >
                         Login
                     </Button>
-    
-                    <Button
-                        href="/register"
-                        className="mt-3"
-                        style={{ backgroundColor: 'purple', color: 'white' }}
-                    >
-                        Register
-                    </Button>
                 </div>
             </BootstrapForm>
         </div>
