@@ -3,41 +3,47 @@
     "analyse": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/analyse.7bc65c2e.js"
+        "/build/454.c81bf05d.js",
+        "/build/493.7d3bbf96.js",
+        "/build/analyse.1992f078.js"
       ]
     },
     "login": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/login.b57d9039.js"
+        "/build/454.c81bf05d.js",
+        "/build/733.f545e2c0.js",
+        "/build/login.7e244f8c.js"
+      ]
+    },
+    "modal": {
+      "js": [
+        "/build/runtime.568f3bb4.js",
+        "/build/modal.41eb7018.js"
       ]
     },
     "register": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/register.edbf877f.js"
+        "/build/454.c81bf05d.js",
+        "/build/733.f545e2c0.js",
+        "/build/register.a6a46151.js"
       ]
     },
     "reportHistory": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/99.6d9ea14d.js",
-        "/build/reportHistory.9202e657.js"
+        "/build/454.c81bf05d.js",
+        "/build/99.0dd712bb.js",
+        "/build/reportHistory.c76a8358.js"
       ]
     },
     "sendMail": {
       "js": [
         "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/sendMail.2b25ca9c.js"
+        "/build/454.c81bf05d.js",
+        "/build/733.f545e2c0.js",
+        "/build/sendMail.da66c335.js"
       ]
     },
     "app": {
