@@ -28,13 +28,8 @@ const ReportHistory = () => {
     }));
   };
 
-  const formatReport = (report) => {
-    return report.split('\n').map((line, index) => (
-      <React.Fragment key={index}>
-        {line}
-        <br />
-      </React.Fragment>
-    ));
+  const ReportContent = ({ htmlContent }) => {
+    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
   };
 
   return (
@@ -68,9 +63,7 @@ const ReportHistory = () => {
                   <td colSpan="3">
                     <Collapse isOpen={isOpen[index]}>
                       <div className="report-content">
-                        <h3>{report.analyse_report_title}</h3>
-                        <p>{formatReport(report.analyse_report)}</p>
-                        
+                        <ReportContent htmlContent={report.analyse_report} />
                       </div>
                     </Collapse>
                   </td>

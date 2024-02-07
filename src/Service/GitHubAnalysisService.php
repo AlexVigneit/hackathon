@@ -15,7 +15,7 @@ class GitHubAnalysisService
     public function __construct()
     {
         $this->client = new Client();
-        $this->phpFilesDirectory = $_SERVER['DOCUMENT_ROOT'] . '/phpFiles';
+        $this->phpFilesDirectory = $_SERVER['DOCUMENT_ROOT'] . 'phpFiles';
         if (!file_exists($this->phpFilesDirectory)) {
             mkdir($this->phpFilesDirectory, 0777, true);
         }
@@ -89,12 +89,14 @@ class GitHubAnalysisService
 
     private function formatReport(array $reportData): string
     {
-        $reportString = "Rapport d'analyse :\n";
+        error_log($this->phpFilesDirectory);
+        $reportString = "<h3>Rapport d'analyse :</h3> </br>";
         foreach ($reportData['files'] as $file => $errors) {
+
             $file = str_replace($this->phpFilesDirectory, '', $file);
-            $reportString .= "\nFichier : $file\n";
+            $reportString .= "</br> Fichier : $file </br>";
             foreach ($errors['messages'] as $error) {
-                $reportString .= "Ligne {$error['line']} : {$error['message']}\n";
+                $reportString .= "<div class='mb-3' >Ligne {$error['line']} : {$error['message']}</div> </br>";
             }
         }
         return $reportString;
