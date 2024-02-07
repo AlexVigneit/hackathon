@@ -17,6 +17,7 @@ class AnalyseController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $user = $security->getUser();
+        $mail = $user->getUserIdentifier();
         $data = json_decode($request->getContent(), true);
         $url = $data['url'] ?? null;
         $analysisRequest = new Report();
@@ -26,7 +27,7 @@ class AnalyseController extends AbstractController
         $analysisRequest->setCreatedAt(new \DateTimeImmutable());
         $analysisRequest->setAnalyseReport($report);
         $analysisRequest->setUser($user);
-        
+
 
         $entityManager->persist($analysisRequest);
         $entityManager->flush();
@@ -35,6 +36,9 @@ class AnalyseController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
-        return $this->json($analysisRequest);
+        return $this->json([
+            'report' => $analysisRequest,
+            'email' => $mail
+        ]);
     }
 }
