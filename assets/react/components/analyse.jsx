@@ -5,6 +5,7 @@ import Modal from './modal';
 
 const Analyse = () => {
     const [url, setUrl] = useState('');
+    const [report, setReport] = useState('');
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [progressMessage, setProgressMessage] = useState('');
     const [analysisComplete, setAnalysisComplete] = useState(false);
@@ -26,17 +27,26 @@ const Analyse = () => {
             body: JSON.stringify({ url: url })
         };
 
+        const requestMailOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ report: report })
+        };
+
         try {
             setTimeout(async () => {
                 const response = await fetch('http://127.0.0.1:8000/analyse', requestOptions);
                 if (!response.ok) throw new Error('Réponse réseau non ok');
                 setTimeout(async () => {
                     const data = await response.json();
+                    setReport(data.report);
                     console.log('Analyse effectuée avec succès:', data);
                     setProgressMessage('Analyse terminée.');
                     setProgressMessage(`Le rapport a été envoyé au mail : ${data.email}. \n Vous pouvez également le retrouver sur la section My reports.`);
+                    const fetchData = await fetch('http://127.0.0.1:8000/sendMail', requestMailOptions)
                     setIsAnalyzing(false);
                     setAnalysisComplete(true);
+                    // fetch vers sendmail
                 }, 2000);
             }, 1000);
         } catch (error) {
