@@ -59,6 +59,6 @@ class AppAuthenticator extends AbstractAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         // Return a response indicating authentication failure
-        return new JsonResponse(['error' => 'Authentication failed.'], Response::HTTP_UNAUTHORIZED);
+        return new JsonResponse(['error' => 'Authentication failed.', 'message' => 'non'], Response::HTTP_UNAUTHORIZED);
     }
 }
