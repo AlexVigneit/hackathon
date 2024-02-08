@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Report;
+use App\Service\GitHubAnalysisService;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Report;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Service\GitHubAnalysisService;
-use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AnalyseController extends AbstractController
 {
@@ -23,6 +24,14 @@ class AnalyseController extends AbstractController
         $analysisRequest = new Report();
         $gitHubAnalysisService = new GitHubAnalysisService();
         $report = $gitHubAnalysisService->processAnalysisRequest($url);
+
+        try {
+            $report = $gitHubAnalysisService->processAnalysisRequest($url);
+        } catch (\Exception $e) {
+            throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Une erreur est survenue. Vérifiez que le repo est Public et qu\'il comporte bien des fichiers écrits en PHP.');
+        }
+
+
         $analysisRequest->setGithubRepositoryUrl($url);
         $analysisRequest->setCreatedAt(new \DateTimeImmutable());
         $analysisRequest->setAnalyseReport($report);

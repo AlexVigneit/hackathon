@@ -38,13 +38,12 @@ const Analyse = () => {
                     const fetchData = await fetch('http://127.0.0.1:8000/sendMail', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ report: data.report }) });
                     setIsAnalyzing(false);
                     setAnalysisComplete(true);
-                    // fetch vers sendmail
                 }, 2000);
             }, 1000);
         } catch (error) {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
             setIsAnalyzing(false);
-            setProgressMessage('Erreur lors de l\'analyse. Veuillez réessayer.');
+            setProgressMessage(error);
         }
     };
 
