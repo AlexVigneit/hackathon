@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import { Form as BootstrapForm, Button } from 'react-bootstrap';
+import { Form as BootstrapForm, Button, Alert } from 'react-bootstrap';
 
 const Register = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -18,19 +19,31 @@ const Register = () => {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/register',
-                requestOptions
-            );
-            const data = await response.json();
-            window.location.reload();
+            const response = await fetch('http://127.0.0.1:8000/register', requestOptions);
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                const data = await response.json();
+                setErrorMessage(data.message);
+            }
         } catch (error) {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
         }
     };
 
+    useEffect(() => {
+        // Effacer le message d'erreur après 3 secondes
+        const timer = setTimeout(() => {
+            setErrorMessage('');
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, [errorMessage]);
+
     return (
         <div className="form-container centered-form">
             <h2>Registration</h2>
+            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
             <BootstrapForm onSubmit={handleSubmit} className="custom-form">
                 <BootstrapForm.Group controlId="formFirstName">
                     <BootstrapForm.Label>First Name :</BootstrapForm.Label>

@@ -10,20 +10,25 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\CustomCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AppAuthenticator extends AbstractAuthenticator
 {
     private $userProvider;
+    private $userPasswordHasher;
+    private $validator;
 
-    public function __construct(UserProviderInterface $userProvider, UserPasswordHasherInterface $userPasswordHasher)
+    public function __construct(UserProviderInterface $userProvider, UserPasswordHasherInterface $userPasswordHasher, ValidatorInterface $validator)
     {
         $this->userProvider = $userProvider;
         $this->userPasswordHasher = $userPasswordHasher;
+        $this->validator = $validator;
     }
 
     public function supports(Request $request): ?bool
@@ -38,10 +43,26 @@ class AppAuthenticator extends AbstractAuthenticator
         $username = $credentials['username'] ?? '';
         $password = $credentials['password'] ?? '';
 
+        // Valider le mot de passe et le format de l'email
+        $errors = $this->validator->validate($credentials, new Assert\Collection([
+            'username' => [new Assert\Email()],
+            'password' => [new Assert\Length(['min' => 8])]
+        ]));
+
+        if (count($errors) > 0) {
+            // Gérer les erreurs de validation
+            $errorMessages = [];
+            foreach ($errors as $error) {
+                $errorMessages[] = $error->getMessage();
+            }
+            throw new CustomUserMessageAuthenticationException(implode("\n", $errorMessages));
+        }
+
         $user = $this->userProvider->loadUserByIdentifier($username);
 
         if (!$this->userPasswordHasher->isPasswordValid($user, $password)) {
-            throw new CustomUserMessageAuthenticationException('Invalid credentials.');
+            $errorMessage = 'Invalid credentials';
+            throw new CustomUserMessageAuthenticationException($errorMessage);
         }
 
         return new Passport(
@@ -58,7 +79,10 @@ class AppAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        // Return a response indicating authentication failure
-        return new JsonResponse(['error' => 'Authentication failed.', 'message' => 'non'], Response::HTTP_UNAUTHORIZED);
+        // Récupérer le message d'erreur personnalisé
+        $errorMessage = $exception->getMessageKey();
+
+        // Retourner la réponse d'erreur avec le message personnalisé
+        return new JsonResponse(['error' => 'Authentication failed.', 'message' => $errorMessage], Response::HTTP_UNAUTHORIZED);
     }
 }
