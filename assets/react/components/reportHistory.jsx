@@ -34,12 +34,12 @@ const ReportHistory = () => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar className="custom-navbar" color="light" light expand="md">
         {/* Contenu du Navbar */}
       </Navbar>
-      <Container>
-        <h2>Rapports</h2>
-        <Table striped>
+      <Container className="custom-container">
+        <h2 className="custom-heading">Rapports</h2>
+        <Table className="custom-table" striped>
           <thead>
             <tr>
               <th>Date de Création</th>
@@ -54,7 +54,7 @@ const ReportHistory = () => {
                   <td>{report.created_at}</td>
                   <td><a href={report.github_repository_url}>{report.github_repository_url}</a></td>
                   <td>
-                    <button onClick={() => toggleCollapse(index)}>
+                    <button className="custom-button" onClick={() => toggleCollapse(index)}>
                       {isOpen[index] ? 'Cacher' : 'Afficher'} le Rapport
                     </button>
                   </td>

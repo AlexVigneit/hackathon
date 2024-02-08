@@ -11,7 +11,7 @@ class GitHubAnalysisService
 {
     private $client;
     private $phpFilesDirectory;
-    
+
     public function __construct()
     {
         $this->client = new Client();
@@ -21,7 +21,7 @@ class GitHubAnalysisService
         }
     }
 
-    public function processAnalysisRequest($url) : string
+    public function processAnalysisRequest($url): string
     {
         [$owner, $repo] = $this->parseRepositoryUrl($url);
 
@@ -37,7 +37,6 @@ class GitHubAnalysisService
         }
 
         return $this->runPhpStan();
-
     }
 
     private function parseRepositoryUrl(string $repositoryUrl): array
@@ -92,15 +91,15 @@ class GitHubAnalysisService
     private function formatReport(array $reportData): string
     {
         error_log($this->phpFilesDirectory);
-        $reportString = "<h3>Rapport d'analyse :</h3> </br>";
+        $reportString = "<h3 class='report-title'>Rapport d'analyse :</h3>";
         foreach ($reportData['files'] as $file => $errors) {
-
             $file = str_replace($this->phpFilesDirectory, '', $file);
-            $reportString .= "</br> Fichier : $file </br>";
+            $reportString .= "<div class='file-heading'>Fichier : $file</div>";
             foreach ($errors['messages'] as $error) {
-                $reportString .= "<div style='margin-bottom:12px;' >Ligne {$error['line']} : {$error['message']}</div> </br>";
+                $reportString .= "<div class='error-message'>Ligne {$error['line']} : {$error['message']}</div>";
             }
         }
+
         return $reportString;
     }
 }

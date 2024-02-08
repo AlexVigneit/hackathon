@@ -2,58 +2,58 @@
   "entrypoints": {
     "analyse": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/analyse.5f7e9f2d.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/88.ea6f054d.js",
+        "/build/16.14380d1c.js",
+        "/build/analyse.c1b71e09.js"
       ]
     },
     "login": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/login.b57d9039.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/88.ea6f054d.js",
+        "/build/16.14380d1c.js",
+        "/build/login.38baa2ed.js"
       ]
     },
     "modal": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/modal.41eb7018.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/modal.3f04fbda.js"
       ]
     },
     "register": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/register.edbf877f.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/88.ea6f054d.js",
+        "/build/16.14380d1c.js",
+        "/build/register.67c29f68.js"
       ]
     },
     "reportHistory": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/99.6d9ea14d.js",
-        "/build/reportHistory.9202e657.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/88.ea6f054d.js",
+        "/build/284.2029b34f.js",
+        "/build/reportHistory.4306ca21.js"
       ]
     },
     "sendMail": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/589.a7b1b476.js",
-        "/build/733.3d6e3094.js",
-        "/build/sendMail.2b25ca9c.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/88.ea6f054d.js",
+        "/build/16.14380d1c.js",
+        "/build/sendMail.20264604.js"
       ]
     },
     "app": {
       "js": [
-        "/build/runtime.568f3bb4.js",
-        "/build/app.f1537bb5.js"
+        "/build/runtime.08fa2b49.js",
+        "/build/app.10ff74c7.js"
       ],
       "css": [
-        "/build/462.a0c661c0.css",
-        "/build/app.872900e8.css"
+        "/build/81.a0c661c0.css",
+        "/build/app.a477e1f4.css"
       ]
     }
   }
