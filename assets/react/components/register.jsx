@@ -24,26 +24,22 @@ const Register = () => {
                 window.location.reload();
             } else {
                 const data = await response.json();
-                setErrorMessage(data.message);
+                console.log('skdngjksngksdfngkjsdngkjsdngk')
+                setErrorMessage(data.errors);
             }
         } catch (error) {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
         }
     };
 
-    useEffect(() => {
-        // Effacer le message d'erreur après 3 secondes
-        const timer = setTimeout(() => {
-            setErrorMessage('');
-        }, 3000);
-
-        return () => clearTimeout(timer);
-    }, [errorMessage]);
+    const ReportContent = ({ htmlContent }) => {
+        return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+      };
 
     return (
         <div className="form-container centered-form">
             <h2>Registration</h2>
-            {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
+            {errorMessage && <Alert variant="danger"><ReportContent htmlContent={errorMessage} /></Alert>}
             <BootstrapForm onSubmit={handleSubmit} className="custom-form">
                 <BootstrapForm.Group controlId="formFirstName">
                     <BootstrapForm.Label>First Name :</BootstrapForm.Label>

@@ -91,15 +91,36 @@ class GitHubAnalysisService
     private function formatReport(array $reportData): string
     {
         error_log($this->phpFilesDirectory);
-        $reportString = "<h3 class='report-title'>Rapport d'analyse :</h3>";
+        $reportString = "<style>.report-content {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+          }
+          .report-title {
+            margin-bottom: 20px;
+        }
+        
+        .file-heading {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            margin-bottom: 12px;
+        }
+        .wrapper-file{
+          background-color: #ced4da;
+        }</style><h3 class='report-title'>Rapport d'analyse :</h3>";
         foreach ($reportData['files'] as $file => $errors) {
             $file = str_replace($this->phpFilesDirectory, '', $file);
-            echo "<div class='wrapper-file'>";
+            $reportString.= "<div class='wrapper-file'>";
             $reportString .= "<div class='file-heading'>Fichier : $file</div>";
             foreach ($errors['messages'] as $error) {
                 $reportString .= "<div class='error-message'>Ligne {$error['line']} : {$error['message']}</div>";
             }
-            echo "</div>";
+            $reportString.= "</div>";
         }
 
         return $reportString;

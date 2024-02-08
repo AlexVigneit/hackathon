@@ -37,7 +37,7 @@ class AnalyseController extends AbstractController
         $entityManager->flush();
 
         return $this->json([
-            'report' => $analysisRequest,
+            'report' => $report,
             'email' => $mail
         ]);
     }

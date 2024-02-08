@@ -35,7 +35,11 @@ class AuthController extends AbstractController
         $errors = $validator->validate($user);
 
         if (count($errors) > 0) {
-            $errorsString = (string) $errors;
+            $errorsMessages = [];
+            foreach ($errors as $error) {
+            $errorsMessages[] = $error->getMessage();
+            }
+            $errorsString = implode('<br>', $errorsMessages);
 
             return $this->json(['message' => 'Validation failed', 'errors' => $errorsString], Response::HTTP_BAD_REQUEST);
         }

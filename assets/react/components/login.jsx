@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Form as BootstrapForm, Button } from 'react-bootstrap';
+import { Form as BootstrapForm, Button, Alert } from 'react-bootstrap';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -31,12 +31,6 @@ const Login = () => {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
         }
     };
-
-    useEffect(() => {
-        setTimeout(() => {
-            setErrorMessage('')
-        }, 3000);
-    },[errorMessage])
 
     return (
         <div className="form-container centered-form">

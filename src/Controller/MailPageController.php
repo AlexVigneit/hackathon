@@ -38,7 +38,7 @@ class MailPageController extends AbstractController
 
         $fileName = $txtFilesDirectory ."/rapport_analyse.html";
         file_put_contents($fileName, $data['report']);
-
+        
         $email = (new Email())
             ->from('ifullteam@gmail.com')
             ->to($security->getUser()->getUserIdentifier())
@@ -47,7 +47,7 @@ class MailPageController extends AbstractController
             ->attachFromPath($fileName, 'AnalyseReport');
         try {
             $mailer->send($email);
-            unlink($fileName);
+            //unlink($fileName);
             return new Response('Email envoyé avec succès au ' . $security->getUser()->getUserIdentifier() . '!');
         } catch (TransportExceptionInterface $e) {
             return new Response('Erreur lors de l\'envoi de l\'email: ' . $e->getMessage());
