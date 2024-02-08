@@ -52,7 +52,9 @@ class GitHubAnalysisService
 
     private function getPhpFiles(string $owner, string $repo): array
     {
-        $response = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo/git/trees/master?recursive=1");
+        $repoInfo = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo");
+        $defaultBranch = json_decode($repoInfo->getBody())->default_branch;
+        $response = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo/git/trees/$defaultBranch?recursive=1");
         $data = json_decode($response->getBody(), true);
 
         return array_filter($data['tree'], function ($item) {
@@ -96,7 +98,7 @@ class GitHubAnalysisService
             $file = str_replace($this->phpFilesDirectory, '', $file);
             $reportString .= "</br> Fichier : $file </br>";
             foreach ($errors['messages'] as $error) {
-                $reportString .= "<div class='mb-3' >Ligne {$error['line']} : {$error['message']}</div> </br>";
+                $reportString .= "<div style='margin-bottom:12px;' >Ligne {$error['line']} : {$error['message']}</div> </br>";
             }
         }
         return $reportString;
