@@ -11,7 +11,7 @@ class GitHubAnalysisService
 {
     private $client;
     private $phpFilesDirectory;
-    
+
     public function __construct()
     {
         $this->client = new Client();
@@ -21,7 +21,7 @@ class GitHubAnalysisService
         }
     }
 
-    public function processAnalysisRequest($url) : string
+    public function processAnalysisRequest($url): string
     {
         [$owner, $repo] = $this->parseRepositoryUrl($url);
 
@@ -37,7 +37,6 @@ class GitHubAnalysisService
         }
 
         return $this->runPhpStan();
-
     }
 
     private function parseRepositoryUrl(string $repositoryUrl): array
@@ -52,7 +51,9 @@ class GitHubAnalysisService
 
     private function getPhpFiles(string $owner, string $repo): array
     {
-        $response = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo/git/trees/master?recursive=1");
+        $repoInfo = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo");
+        $defaultBranch = json_decode($repoInfo->getBody())->default_branch;
+        $response = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo/git/trees/$defaultBranch?recursive=1");
         $data = json_decode($response->getBody(), true);
 
         return array_filter($data['tree'], function ($item) {
@@ -90,15 +91,17 @@ class GitHubAnalysisService
     private function formatReport(array $reportData): string
     {
         error_log($this->phpFilesDirectory);
-        $reportString = "<h3>Rapport d'analyse :</h3> </br>";
+        $reportString = "<h3 class='report-title'>Rapport d'analyse :</h3>";
         foreach ($reportData['files'] as $file => $errors) {
-
             $file = str_replace($this->phpFilesDirectory, '', $file);
-            $reportString .= "</br> Fichier : $file </br>";
+            echo "<div class='wrapper-file'>";
+            $reportString .= "<div class='file-heading'>Fichier : $file</div>";
             foreach ($errors['messages'] as $error) {
-                $reportString .= "<div class='mb-3' >Ligne {$error['line']} : {$error['message']}</div> </br>";
+                $reportString .= "<div class='error-message'>Ligne {$error['line']} : {$error['message']}</div>";
             }
+            echo "</div>";
         }
+
         return $reportString;
     }
 }

@@ -64,8 +64,7 @@ const Login = () => {
                 <div className="wrapper-btn">
                     <Button
                         type="submit"
-                        className="mt-3"
-                        style={{ backgroundColor: 'purple', color: 'white' }}
+                        className="mt-3 purple-btn"
                     >
                         Login
                     </Button>
