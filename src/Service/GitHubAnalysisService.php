@@ -33,7 +33,7 @@ class GitHubAnalysisService
                 file_put_contents($this->phpFilesDirectory . '/' . basename($file['path']), $content);
             }
         } catch (GuzzleException $e) {
-            throw new HttpException(500, 'Erreur lors de la récupération des fichiers : ' . $e->getMessage());
+            throw new HttpException(500, 'error finding file : ' . $e->getMessage());
         }
 
         return $this->runPhpStan();
@@ -43,7 +43,7 @@ class GitHubAnalysisService
     {
         $parts = explode('/', trim(parse_url($repositoryUrl, PHP_URL_PATH), '/'));
         if (count($parts) !== 2) {
-            throw new HttpException(400, 'URL du dépôt GitHub non valide');
+            throw new HttpException(400, 'invalid repository url');
         }
 
         return $parts;
@@ -112,13 +112,13 @@ class GitHubAnalysisService
         }
         .wrapper-file{
           background-color: #ced4da;
-        }</style><h3 class='report-title'>Rapport d'analyse :</h3>";
+        }</style><h3 class='report-title'>Analyze report :</h3>";
         foreach ($reportData['files'] as $file => $errors) {
             $file = str_replace($this->phpFilesDirectory, '', $file);
             $reportString.= "<div class='wrapper-file'>";
-            $reportString .= "<div class='file-heading'>Fichier : $file</div>";
+            $reportString .= "<div class='file-heading'>File : $file</div>";
             foreach ($errors['messages'] as $error) {
-                $reportString .= "<div class='error-message'>Ligne {$error['line']} : {$error['message']}</div>";
+                $reportString .= "<div class='error-message'>Line {$error['line']} : {$error['message']}</div>";
             }
             $reportString.= "</div>";
         }

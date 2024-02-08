@@ -24,11 +24,10 @@ const Register = () => {
                 window.location.reload();
             } else {
                 const data = await response.json();
-                console.log('skdngjksngksdfngkjsdngkjsdngk')
                 setErrorMessage(data.errors);
             }
         } catch (error) {
-            console.error('Erreur lors de l\'envoi du formulaire:', error);
+            setErrorMessage(error.message);
         }
     };
 

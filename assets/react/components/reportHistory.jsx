@@ -14,7 +14,7 @@ const ReportHistory = () => {
         const data = await response.json();
         setReports(data);
       } catch (error) {
-        console.error('Erreur lors de la récupération des rapports:', error);
+        console.error(error);
       }
     };
 
@@ -42,8 +42,8 @@ const ReportHistory = () => {
         <Table className="custom-table" striped>
           <thead>
             <tr>
-              <th>Date de Création</th>
-              <th>URL du Repository GitHub</th>
+              <th>Creation date</th>
+              <th>GitHub Repository URL</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -55,7 +55,7 @@ const ReportHistory = () => {
                   <td><a href={report.github_repository_url}>{report.github_repository_url}</a></td>
                   <td>
                     <button className="custom-button purple-btn btn" onClick={() => toggleCollapse(index)}>
-                      {isOpen[index] ? 'Cacher' : 'Afficher'} le Rapport
+                      {isOpen[index] ? 'Hide' : 'Display'} report
                     </button>
                   </td>
                 </tr>

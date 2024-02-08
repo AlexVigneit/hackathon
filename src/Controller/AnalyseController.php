@@ -23,12 +23,11 @@ class AnalyseController extends AbstractController
         $url = $data['url'] ?? null;
         $analysisRequest = new Report();
         $gitHubAnalysisService = new GitHubAnalysisService();
-        $report = $gitHubAnalysisService->processAnalysisRequest($url);
 
         try {
             $report = $gitHubAnalysisService->processAnalysisRequest($url);
         } catch (\Exception $e) {
-            return $this->json(['message' => 'Validation failed', 'error' => 'Une erreur est survenue. Vérifiez que le repo est Public et qu\'il comporte bien des fichiers écrits en PHP.'], Response::HTTP_BAD_REQUEST);
+            return $this->json(['message' => 'Validation failed', 'error' => 'An error has occurred. Check that the repo is Public and that it contains files written in PHP.'], Response::HTTP_BAD_REQUEST);
         }
 
 
@@ -48,6 +47,6 @@ class AnalyseController extends AbstractController
         return $this->json([
             'report' => $report,
             'email' => $mail
-        ]);
+        ], Response::HTTP_OK);
     }
 }

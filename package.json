@@ -21,6 +21,8 @@
     "build": "encore production --progress"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.2",
     "copy-file": "^0.0.1",

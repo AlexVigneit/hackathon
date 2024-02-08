@@ -36,21 +36,21 @@ class MailPageController extends AbstractController
         $transport = Transport::fromDsn('smtp://ifullteam@gmail.com:uxjwrfkegiuqxqan@smtp.gmail.com:587');
         $mailer = new Mailer($transport);
 
-        $fileName = $txtFilesDirectory ."/rapport_analyse.html";
+        $fileName = $txtFilesDirectory . "/rapport_analyse.html";
         file_put_contents($fileName, $data['report']);
-        
+
         $email = (new Email())
             ->from('ifullteam@gmail.com')
             ->to($security->getUser()->getUserIdentifier())
-            ->subject('Rapport d\'analyse github')
-            ->html('<p>Vous trouverez ci-joint le rapport d\'analyse de votre repository github.</p>')
+            ->subject('Github analysis report')
+            ->html('<p>You will find attached the analysis report of your github repository.</p>')
             ->attachFromPath($fileName, 'AnalyseReport');
         try {
             $mailer->send($email);
-            //unlink($fileName);
-            return new Response('Email envoyé avec succès au ' . $security->getUser()->getUserIdentifier() . '!');
+            unlink($fileName);
+            return new Response('Succes send to ' . $security->getUser()->getUserIdentifier() . '!');
         } catch (TransportExceptionInterface $e) {
-            return new Response('Erreur lors de l\'envoi de l\'email: ' . $e->getMessage());
+            return new Response('Sending error' . $e->getMessage());
         }
     }
 }

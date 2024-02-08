@@ -28,7 +28,7 @@ const Login = () => {
                 setErrorMessage(data.message);
             }
         } catch (error) {
-            console.error('Erreur lors de l\'envoi du formulaire:', error);
+            setErrorMessage(error.message);
         }
     };
 
