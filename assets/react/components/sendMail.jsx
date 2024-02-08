@@ -27,8 +27,7 @@ const SendMail = () => {
             <BootstrapForm onSubmit={handleSubmit} className="custom-form">
                 <Button
                     type="submit"
-                    className="mt-3"
-                    style={{ backgroundColor: 'purple', color: 'white' }}
+                    className="mt-3 purple-btn"
                 >
                     Envoyer un mail
                 </Button>

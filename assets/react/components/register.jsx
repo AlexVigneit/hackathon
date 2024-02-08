@@ -70,8 +70,7 @@ const Register = () => {
                 </BootstrapForm.Group>
                 <Button
                     type="submit"
-                    className="mt-3"
-                    style={{ backgroundColor: 'purple', color: 'white' }}
+                    className="mt-3 purple-btn"
                 >
                     Register
                 </Button>

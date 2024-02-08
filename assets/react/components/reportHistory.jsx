@@ -54,7 +54,7 @@ const ReportHistory = () => {
                   <td>{report.created_at}</td>
                   <td><a href={report.github_repository_url}>{report.github_repository_url}</a></td>
                   <td>
-                    <button className="custom-button" onClick={() => toggleCollapse(index)}>
+                    <button className="custom-button purple-btn btn" onClick={() => toggleCollapse(index)}>
                       {isOpen[index] ? 'Cacher' : 'Afficher'} le Rapport
                     </button>
                   </td>

@@ -94,10 +94,12 @@ class GitHubAnalysisService
         $reportString = "<h3 class='report-title'>Rapport d'analyse :</h3>";
         foreach ($reportData['files'] as $file => $errors) {
             $file = str_replace($this->phpFilesDirectory, '', $file);
+            echo "<div class='wrapper-file'>";
             $reportString .= "<div class='file-heading'>Fichier : $file</div>";
             foreach ($errors['messages'] as $error) {
                 $reportString .= "<div class='error-message'>Ligne {$error['line']} : {$error['message']}</div>";
             }
+            echo "</div>";
         }
 
         return $reportString;
