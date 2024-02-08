@@ -28,7 +28,7 @@ class AnalyseController extends AbstractController
         try {
             $report = $gitHubAnalysisService->processAnalysisRequest($url);
         } catch (\Exception $e) {
-            throw new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, 'Une erreur est survenue. Vérifiez que le repo est Public et qu\'il comporte bien des fichiers écrits en PHP.');
+            return $this->json(['message' => 'Validation failed', 'error' => 'Une erreur est survenue. Vérifiez que le repo est Public et qu\'il comporte bien des fichiers écrits en PHP.'], Response::HTTP_BAD_REQUEST);
         }
 
 

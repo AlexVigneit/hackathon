@@ -29,9 +29,13 @@ const Analyse = () => {
         try {
             setTimeout(async () => {
                 const response = await fetch('http://127.0.0.1:8000/analyse', requestOptions);
-                if (!response.ok) throw new Error('Réponse réseau non ok');
+                const data = await response.json();
+                if (!response.ok) {
+                    setIsAnalyzing(false);
+                    setProgressMessage(data.error);
+                }
                 setTimeout(async () => {
-                    const data = await response.json();
+                    
                     console.log('Analyse effectuée avec succès:', data);
                     setProgressMessage('Analyse terminée.');
                     setProgressMessage(`Le rapport a été envoyé au mail : ${data.email}. \n Vous pouvez également le retrouver sur la section My reports.`);
@@ -43,7 +47,7 @@ const Analyse = () => {
         } catch (error) {
             console.error('Erreur lors de l\'envoi du formulaire:', error);
             setIsAnalyzing(false);
-            setProgressMessage(error);
+            setProgressMessage(error.message);
         }
     };
 
