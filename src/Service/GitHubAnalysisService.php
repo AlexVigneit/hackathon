@@ -11,6 +11,8 @@ class GitHubAnalysisService
 {
     private $client;
     private $phpFilesDirectory;
+
+    private $defaultBranch;
     
     public function __construct()
     {
@@ -53,8 +55,8 @@ class GitHubAnalysisService
     private function getPhpFiles(string $owner, string $repo): array
     {
         $repoInfo = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo");
-        $defaultBranch = json_decode($repoInfo->getBody())->default_branch;
-        $response = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo/git/trees/$defaultBranch?recursive=1");
+        $this->defaultBranch = json_decode($repoInfo->getBody())->default_branch;
+        $response = $this->client->request('GET', "https://api.github.com/repos/$owner/$repo/git/trees/$this->defaultBranch?recursive=1");
         $data = json_decode($response->getBody(), true);
 
         return array_filter($data['tree'], function ($item) {
@@ -64,7 +66,7 @@ class GitHubAnalysisService
 
     private function getFileContent(string $owner, string $repo, string $path): string
     {
-        $response = $this->client->request('GET', "https://raw.githubusercontent.com/$owner/$repo/master/$path");
+        $response = $this->client->request('GET', "https://raw.githubusercontent.com/$owner/$repo/$this->defaultBranch/$path");
         return (string)$response->getBody();
     }
 
