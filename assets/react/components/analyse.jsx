@@ -46,7 +46,7 @@ const Analyse = () => {
                     setTimeout(async () => {
                         setProgressMessage('Analysis completed.');
                         setProgressMessage(`The report was sent to the email : ${data.email}. \n You can also find it in the My reports section.`);
-                        const fetchData = await fetch('http://127.0.0.1:8000/sendMail', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ report: data.report }) });
+                        const fetchData = await fetch('http://134.209.182.173:8000/sendMail', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ report: data.report }) });
                         setIsAnalyzing(false);
                         setAnalysisComplete(true);
                     }, 2000);
