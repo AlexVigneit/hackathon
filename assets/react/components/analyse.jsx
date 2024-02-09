@@ -32,7 +32,7 @@ const Analyse = () => {
 
         try {
             setTimeout(async () => {
-                const response = await fetch(`http://${process.env.REACT_APP_API_IP}:8000/analyse`, requestOptions);
+                const response = await fetch(`http://134.209.182.173:8000/analyse`, requestOptions);
                 const data = await response.json();
                 if (!response.ok) {
                     setTimeout(async () => {

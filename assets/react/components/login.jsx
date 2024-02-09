@@ -17,7 +17,7 @@ const Login = () => {
         };
 
         try {
-            const response = await fetch(`http://${process.env.REACT_APP_API_IP}:8000/login`,
+            const response = await fetch(`http://134.209.182.173:8000/login`,
                 requestOptions
             );
             if (response.ok) {

@@ -19,7 +19,7 @@ const Register = () => {
         };
 
         try {
-            const response = await fetch(`http://${process.env.REACT_APP_API_IP}:8000/register`, requestOptions);
+            const response = await fetch(`http://134.209.182.173:8000/register`, requestOptions);
             if (response.ok) {
                 window.location.reload();
             } else {

@@ -10,7 +10,7 @@ const ReportHistory = () => {
     // Fonction pour récupérer les rapports
     const fetchReports = async () => {
       try {
-        const response = await fetch(`http://${process.env.REACT_APP_API_IP}:8000/api/reports`);
+        const response = await fetch(`http://134.209.182.173:8000/api/reports`);
         const data = await response.json();
         setReports(data);
       } catch (error) {
